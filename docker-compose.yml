@@ -1,0 +1,26 @@
+blog-mysql:
+  container_name: blog-mysql
+  image: amd64/mysql:5.7
+  environment:
+    - MYSQL_ROOT_PASSWORD=123456
+    - MYSQL_DATABASE=blog-db
+    - MYSQL_USER=shichao
+    - MYSQL_PASSWORD=password
+  #privileged: true
+  ports:
+    - "3307:3306"
+    - "33060:33060"
+  volumes:
+    #- /srv/docker/data/ShareQu-db:/var/lib/mysql
+    - /srv/docker/data/blog-mysql:/var/lib/mysql
+  restart: always
+  command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+# Redis Server Container
+blog-redis:
+  container_name: blog-redis
+  image: registry.cyai.com/cy/redis:base
+  ports:
+    - "6479:6379"
+  restart: always
+
